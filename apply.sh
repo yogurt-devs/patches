@@ -9,6 +9,10 @@ cd packages/apps/Settings || exit 1
 curl https://github.com/begonia-dev/android_packages_apps_Settings/commit/a88066cb1451edb42e75eb66d3b6b8a3dbcba9a6.patch | git am -3 
 cd ../../..
 
+echo "Applying Bluetooth Patches"
+cd packages/apps/Bluetooth && git fetch https://github.com/SakthivelNadar/packages_modules_Bluetooth && git cherry-pick 37389ae84e45fd30599f09a0d36c1611ba1a637c && cd ../../..
+cd frameworks/av && git fetch https://github.com/SakthivelNadar/frameworks_av && git cherry-pick 895d73bd0112b93d8c567b1c76c8d28eb5167825^..b7ebc7f07e48589400137c77f8bf5c8c594ec19b && cd ../..
+
 echo "Apply MTK Enhancements"
 cd frameworks/native || exit 1
 git fetch https://review.arrowos.net/ArrowOS/android_frameworks_native refs/changes/51/18651/1 && git cherry-pick FETCH_HEAD
